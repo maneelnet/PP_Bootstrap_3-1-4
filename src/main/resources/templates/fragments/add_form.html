@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<th:block th:fragment="add_form">
+  <div class="container col-6 form-group text-center">
+    <form role="form" th:action="@{/admin/save}" th:method="post" th:object="${newUser}">
+      <div>
+        <label for="newFirstName"><b>First name</b></label>
+        <input type="text" class="form-control" placeholder="Enter first name" th:field="*{firstName}" id="newFirstName" required>
+      </div>
+      <div>
+        <label for="newLastName"><b>Last name</b></label>
+        <input type="text" class="form-control" placeholder="Enter last name" th:field="*{lastName}" id="newLastName" required>
+      </div>
+      <div>
+        <label for="newAge"><b>Age</b></label>
+        <input type="number" class="form-control" th:field="*{age}" id="newAge" required>
+      </div>
+      <div>
+        <label for="newEmail"><b>E-mail</b></label>
+        <input type="text" class="form-control" placeholder="Enter e-mail" th:field="*{email}" id="newEmail" autocomplete="username" required>
+      </div>
+      <div id="password-div">
+        <label for="newPassword"><b>Password</b></label>
+        <input type="password" class="form-control" th:field="*{password}" placeholder="Enter password" id="newPassword" name="password" autocomplete="current-password"required>
+      </div>
+      <div>
+        <label for="newRoles"><b>Role</b></label>
+        <select multiple class="form-control" id="newRoles" name="roles" required>
+          <option th:each="role : ${roles}"
+                  th:text="${role.getDescription()}"
+                  th:value="${role.id}">
+        </select>
+      </div>
+      <div>
+        <button type="submit" class="btn btn-success mt-3">Add new User</button>
+      </div>
+    </form>
+  </div>
+</th:block>
+</body>
+</html>
